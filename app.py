@@ -18,9 +18,11 @@ def extract_resume(url, skills_file=None, custom_regex=None):
     resume_parser = ResumeParser(_file, skills_file, custom_regex)
     return [resume_parser.get_extracted_data()]
   except urllib.error.HTTPError:
-    print('File not found. Please provide correct URL for resume file')
-    sys.exit(1)
+    s = 'File not found. Please provide correct URL for resume file.'
+    print(s)
+    raise NameError(s)
 
+# POST request that expects form parameter of 'url'
 @app.route('/parse', methods=['POST'])
 def parse():
   try:
@@ -30,5 +32,4 @@ def parse():
     print(e)
     return e[0]
   except Exception as e:
-    print(e)
-    raise e
+    return str(e)
