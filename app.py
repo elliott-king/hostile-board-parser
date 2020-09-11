@@ -24,7 +24,7 @@ def extract_resume(url, skills_file=None, custom_regex=None):
 @app.route('/parse', methods=['POST'])
 def parse():
   try:
-    url = request.form['url']
+    url = request.get_json()['url']
     print(url)
     e = extract_resume(url)
     print(e)
